@@ -1,0 +1,33 @@
+# This is just my personal installer for the Doom 3 CD data.
+
+pkgname=doom3-cd-data
+pkgver=1
+pkgrel=1
+pkgdesc='Doom 3 data files from the CD'
+url='http://www.idsoftware.com/'
+arch=('any')
+license=('custom')
+depends=('doom3-data')
+source=('pak000.pk4'
+        'pak001.pk4'
+        'pak002.pk4'
+        'pak003.pk4'
+        'pak004.pk4')
+noextract=('pak000.pk4'
+           'pak001.pk4'
+           'pak002.pk4'
+           'pak003.pk4'
+           'pak004.pk4')
+sha256sums=('220513bba8cc51191738b52b4ea320cd3376736e13147e240aa503622aa926ce'
+            'dc85da3d731793f2973ffb7ef31be17057e88dee0b1157531c7f26a7b33c8fc0'
+            '52d50dc300c87c484a0d7bc28c64777cafd7d581a91b5eeb6222991e328b7f1c'
+            'a946bf100ba931edb1d814d78baccc5b8279a52b1351ab00bb049bce993e365a'
+            'eac10316182f06832b7c087dbac4dad98c4e3243e6aecf7d9906ff7ba9514ba3')
+PKGEXT='.pkg.tar'
+
+package() {
+  cd "$srcdir"
+
+  install -d "$pkgdir"/usr/share/games/doom3/base
+  install -m 644 pak00{0,1,2,3,4}.pk4 "$pkgdir"/usr/share/games/doom3/base
+}
