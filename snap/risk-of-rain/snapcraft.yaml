@@ -1,0 +1,24 @@
+name: risk-of-rain
+version: 1.3.0
+summary: An action platformer/adventure game with randomized elements
+description: |
+  Risk of Rain is an action platformer with roguelike elements. With permanent
+  death as a primary feature, players will have to play their best to get as far
+  as possible. Fight on a mysterious planet with randomly spawning enemies and
+  bosses, either alone or with 3 friends in online co-op. With over 100 items at
+  your disposal, you will find the tools you need to find the teleporter back
+  home. Discover a myriad of randomly chosen stages, from the desolate forest to
+  the frozen tundra.
+grade: devel
+confinement: devmode
+base: core18
+architectures:
+  - build-on: amd64
+    run-on: [i386, amd64]
+parts:
+  risk-of-rain:
+    plugin: dump
+    source: Risk_of_Rain_v1.3.0_DRM-Free_Linux_.zip
+apps:
+  risk-of-rain:
+    command: Risk_of_Rain
