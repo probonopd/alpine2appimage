@@ -56,4 +56,4 @@ linuxdeploy-root/usr/bin/linuxdeploy \
     --icon-file=app/assets/icon.png \
     --output=appimage \
     && mkdir -p "$out_dir" \
-    && mv Risk_of_Rain*.AppImage /tmp/out/
+    && mv Risk_of_Rain*.AppImage "$out_dir"
