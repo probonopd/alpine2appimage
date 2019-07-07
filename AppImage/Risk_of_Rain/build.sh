@@ -52,6 +52,24 @@ cp -vR app/assets AppDir/usr/bin/
 linuxdeploy-root/usr/bin/linuxdeploy \
     --appdir=AppDir \
     --executable=app/Risk_of_Rain \
+    --library=/lib/i386-linux-gnu/libc.so.6 \
+    --library=/lib/i386-linux-gnu/libcom_err.so.2 \
+    --library=/lib/i386-linux-gnu/libdl.so.2 \
+    --library=/lib/i386-linux-gnu/libgpg-error.so.0 \
+    --library=/lib/i386-linux-gnu/libkeyutils.so.1 \
+    --library=/lib/i386-linux-gnu/libpthread.so.0 \
+    --library=/lib/i386-linux-gnu/libresolv.so.2 \
+    --library=/lib/i386-linux-gnu/librt.so.1 \
+    --library=/lib/i386-linux-gnu/libz.so.1 \
+    --library=/usr/lib/i386-linux-gnu/libX11.so.6 \
+    --library=/usr/lib/i386-linux-gnu/libdrm.so.2 \
+    --library=/usr/lib/i386-linux-gnu/libglapi.so.0 \
+    --library=/usr/lib/i386-linux-gnu/libp11-kit.so.0 \
+    --library=/usr/lib/i386-linux-gnu/libstdc++.so.6 \
+    --library=/usr/lib/i386-linux-gnu/libxcb-dri2.so.0 \
+    --library=/usr/lib/i386-linux-gnu/libxcb-dri3.so.0 \
+    --library=/usr/lib/i386-linux-gnu/libxcb.so.1 \
+    --library=/usr/lib/i386-linux-gnu/mesa/libGL.so.1 \
     --desktop-file=app/Risk_of_Rain.desktop \
     --icon-file=app/assets/icon.png \
     --output=appimage \
