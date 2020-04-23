@@ -1,0 +1,10 @@
+[Unit]
+Description=Shut down minecraft
+
+[Service]
+Type=oneshot
+ExecCondition=/bin/sh -c 'minecraftd status | grep running'
+ExecStart=/usr/bin/minecraft-shutdown
+
+[Install]
+WantedBy=multi-user.target
