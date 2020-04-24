@@ -11,7 +11,7 @@ source=(minecraft-auto-shutdown.timer
         minecraft-shutdown.sh)
 sha256sums=('9737c6765e35c8b63c4b5792580704c15dfdfee2a1bf7b4ff4491c0defc35f0f'
             '1aa3e743d4e67d45eb16c63638014c6ef79e44e06934f54352060886c614bd38'
-            'c7f48af65529fcc70f835a36e7ce88ab8dd54aa3b3014b7de3e330a9f9cc2331')
+            'd46a7ed94afb90299b9bce35a76966fa45da46444b1cb39ac7c457924557f17c')
 
 package() {
         install -d "${pkgdir}/usr/lib/systemd/system/"
