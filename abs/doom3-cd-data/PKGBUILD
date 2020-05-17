@@ -1,4 +1,4 @@
-# This is just my personal installer for the Doom 3 CD data.
+# Maintainer: Jordan Christiansen <xordspar0@gmail.com>
 
 pkgname=doom3-cd-data
 pkgver=1
