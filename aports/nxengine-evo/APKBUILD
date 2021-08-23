@@ -1,0 +1,40 @@
+# Maintainer: Jordan Christiansen <xordspar0@gmail.com>
+pkgname=nxengine-evo
+pkgver=2.6.5.1
+_realver=2.6.5-1
+pkgrel=0
+pkgdesc="open source reimplementation of Cave Story"
+url="https://github.com/nxengine/nxengine-evo"
+arch="all"
+license="GPL-3.0-only freeware"
+makedepends="cmake sdl2-dev sdl2_mixer-dev sdl2_image-dev libpng-dev libjpeg-turbo-dev"
+options="!check" # Upstream has no tests.
+source="
+https://github.com/nxengine/nxengine-evo/archive/v$_realver.tar.gz
+https://www.cavestory.org/downloads/cavestoryen.zip
+"
+builddir="$srcdir/$pkgname-$_realver"
+
+build() {
+	mkdir build
+	cd build
+
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
+	make
+
+	cd ..
+	cp -r ../CaveStory/data/ ./
+	cp ../CaveStory/Doukutsu.exe ./
+
+	build/nxextract
+}
+
+package() {
+	cd build
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+a2ff5995b114301f5576e44a3d70f614967aceaa5a50de668313899bbf23458bdb9039fd0f63fbe0446edd94edc0b7a990394ed94557d253b5c8fb0e1104e4b2  v2.6.5-1.tar.gz
+9c7c2c6c8114974df14b1dce379b86da48caf299716e1de3d743e47c3ac6a8c13c4a0ada85778e69f11c2428f991dcbfcb0020212279f9c1787260102988cbc3  cavestoryen.zip
+"
