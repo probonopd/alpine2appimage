@@ -14,6 +14,7 @@ apk update && apk add file patchelf
 	-X https://dl-cdn.alpinelinux.org/alpine/edge/testing \
 	-d srb2 \
 	-d mesa-gl \
+	-d mesa-egl \
 	-d libx11 \
 	-d libxext \
 	-d alsa-lib \
