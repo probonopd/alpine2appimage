@@ -37,6 +37,10 @@ squashfs-root/AppRun -s deploy "$appdir"/usr/share/applications/srb2.desktop
 # Demangle ld-musl, which appimagetool messes up with patchelf.
 cp /lib/ld-musl-$(uname -m).so.1 "$appdir"/lib/
 
+# We need to cd to the data directory before starting the game so it can find its files.
+# Would be better to set SRB2WADDIR, but that doesn't work with relative paths due to a bug.
+sed -i 's|exec|cd share/games/SRB2; exec|' "$appdir"/AppRun
+
 export VERSION=$(apk --no-cache -X https://dl-cdn.alpinelinux.org/alpine/edge/testing list srb2 | grep -v fetch | cut -d- -f2)
 export ARCH=$(uname -m)
 squashfs-root/AppRun "$appdir"
