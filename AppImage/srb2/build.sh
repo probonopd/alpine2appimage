@@ -22,7 +22,7 @@ apk update && apk add file patchelf
 	-d alsa-plugins-pulse \
 	"$appdir"
 
-chmod 775 "$appdir"
+chmod 755 "$appdir"
 sed -i 's/Icon=.*/Icon=srb2/' "$appdir"/usr/share/applications/srb2.desktop
 sed -i 's/Exec=.*/Exec=srb2/' "$appdir"/usr/share/applications/srb2.desktop
 ln -s usr/share/pixmaps/srb2.png "$appdir"/srb2.png
