@@ -36,16 +36,8 @@ ln -s usr/share/pixmaps/srb2.png "$appdir"/srb2.png
 
 ############################################
 
-"$tools_dir"/appimagetool.AppImage --appimage-extract
-
-# This old version of patchelf doesn't work with binaries over a certain size
-# https://github.com/NixOS/patchelf/issues/305
-rm squashfs-root/usr/bin/patchelf
-
-squashfs-root/AppRun -s deploy "$appdir"/usr/share/applications/"$PACKAGE".desktop
-
-# Demangle ld-musl, which appimagetool messes up with patchelf.
-cp /lib/ld-musl-$(uname -m).so.1 "$appdir"/lib/
+export APPIMAGE_EXTRACT_AND_RUN=1
+"$tools_dir"/appimagetool.AppImage -s deploy "$appdir"/usr/share/applications/"$PACKAGE".desktop
 
 ############################################
 
@@ -55,5 +47,5 @@ sed -i 's|exec|cd share/games/SRB2; exec|' "$appdir"/AppRun
 
 ############################################
 
-squashfs-root/AppRun "$appdir"
+"$tools_dir"/appimagetool.AppImage "$appdir"
 mv *.AppImage "$out_dir"/
