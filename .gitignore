@@ -1,6 +1,4 @@
 *_source.tar.bz2
-snap/*/parts
-snap/*/stage
-snap/*/prime
-snap/*/snap
-*.snap
+*.AppDir
+*.AppImage
+out/

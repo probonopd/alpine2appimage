@@ -1,9 +1,0 @@
-[Unit]
-Description=Shut down minecraft at 10 pm every night
-
-[Timer]
-OnCalendar=*-*-* 21:45:00
-Persistent=true
-
-[Install]
-WantedBy=timers.target
