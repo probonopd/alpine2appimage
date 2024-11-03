@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eux
 
+[ -z "${PACKAGE}" ] && exit 1
+
 export VERSION=$(apk --no-cache -X https://dl-cdn.alpinelinux.org/alpine/edge/testing list "$PACKAGE" | grep -v fetch | cut -d- -f2)
 export ARCH=$(uname -m)
 
@@ -47,7 +49,8 @@ export APPIMAGE_EXTRACT_AND_RUN=1
 
 ############################################
 
-# No post-processing needed for this application
+# Remove symlinks (to busybox)
+find "$appdir"/usr/bin/ -type l -delete
 
 ############################################
 
