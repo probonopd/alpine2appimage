@@ -12,13 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build SRT2
+      - name: Create AppImage from Alpine
         run: |
-          cd AppImage/srt2
+          cd AppImage/srb2
           make
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: srt2-appimage
-          path: AppImage/srt2/out/*.AppImage
+          path: AppImage/srb2/out/*.AppImage
