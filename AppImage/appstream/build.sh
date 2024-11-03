@@ -11,7 +11,7 @@ out_dir=${OUT_DIR:-/out}
 tools_dir=${TOOLS_DIR:-/tools}
 appdir="$out_dir"/"$PACKAGE".AppDir
 
-apk update && apk add file patchelf
+apk update && apk add file rdfind
 
 "$tools_dir"/witchery-compose \
 	-k /etc/apk/keys \
@@ -68,6 +68,8 @@ export APPIMAGE_EXTRACT_AND_RUN=1
 # No post-post-processing needed for this application
 
 ############################################
+
+rdfind -makesymlinks true . # Replace duplicate files with symlinks
 
 "$tools_dir"/appimagetool.AppImage "$appdir"
 mv *.AppImage "$out_dir"/
