@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        depth: 1
 
       - name: Determine which subdirectory of AppImage/ was changed
         id: changed
