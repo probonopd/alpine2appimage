@@ -16,7 +16,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        depth: 1
+        with:
+          fetch-depth: 2
+          # So that we can use ${{ github.event.before }} to get the commit before the push
 
       - name: Determine which subdirectory of AppImage/ was changed
         id: changed
