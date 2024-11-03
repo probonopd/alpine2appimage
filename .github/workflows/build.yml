@@ -1,0 +1,24 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build SRT2
+        run: |
+          cd AppImage/srt2
+          make
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: srt2-appimage
+          path: AppImage/srt2/out/*.AppImage
