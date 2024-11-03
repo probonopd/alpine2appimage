@@ -3,4 +3,4 @@
 *.AppImage
 out/
 witchery-compose
-squashfs_root/
+squashfs-root/
