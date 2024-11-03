@@ -19,18 +19,26 @@ jobs:
         with:
           fetch-depth: 2 # So we can diff against the previous commit
 
-      - name: Show which package the last commit changed; fall back to appstream package
-        id: changed
+      - name: Determine package; fall back to appstream
+        id: determine-package
         run: |
-          git diff --name-only HEAD~1
+          CHANGED_DIR=$(git diff --name-only HEAD~1 | grep ^AppImage/ | cut -d / -f 2 | sort | uniq | head -n 1)
+          echo "Changed directory, using as package name: $CHANGED_DIR"
+          if [ -z "$CHANGED_DIR" ]; then
+            echo "::set-output name=package::appstream"
+          else
+            echo "::set-output name=package::$CHANGED_DIR"
+          fi
 
       - name: Create AppImage from Alpine
         run: |
           cd AppImage/
-          make PACKAGE=${{ github.event.inputs.package || 'appstream' }}
+          # Echo the package name to the console
+          echo "Building AppImage for ${{ github.event.inputs.package || steps.determine-package.outputs.package }}"
+          make PACKAGE=${{ github.event.inputs.package || steps.determine-package.outputs.package }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: appimage
-          path: AppImage/${{ github.event.inputs.package || 'appstream' }}/out/*.AppImage
+          path: AppImage/${{ github.event.inputs.package || steps.determine-package.outputs.package }}/out/*.AppImage
