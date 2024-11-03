@@ -18,7 +18,7 @@ jobs:
           make
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: srt2-appimage
           path: AppImage/srb2/out/*.AppImage
