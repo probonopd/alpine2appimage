@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Determine which subdiretory of AppImage/ was changed
+      - name: Determine which subdirectory of AppImage/ was changed
         id: changed
         run: |
           echo "::set-output name=package::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -o 'AppImage/[^/]*' | head -n 1)"
