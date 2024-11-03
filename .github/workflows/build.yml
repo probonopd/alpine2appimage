@@ -21,15 +21,15 @@ jobs:
         id: changed
         run: |
           echo "::set-output name=package::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -o 'AppImage/[^/]*' | head -n 1)"
-          echo $package
 
       - name: Create AppImage from Alpine
         run: |
           cd AppImage/
-          make PACKAGE=${{ github.event.inputs.package || $package }}
+          make PACKAGE=${{  }}
+          make PACKAGE=${{ github.event.inputs.package || steps.changed.outputs.package }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: appimage
-          path: AppImage/${{ github.event.inputs.package || $package }}/out/*.AppImage
+          path: AppImage/${{ github.event.inputs.package || steps.changed.outputs.package }}/out/*.AppImage
