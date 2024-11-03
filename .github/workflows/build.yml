@@ -16,14 +16,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-          # So that we can use ${{ github.event.before }} to get the commit before the push
 
-      - name: Determine which subdirectory of AppImage/ was changed
+      - name: Show which package the last commit changed; fall back to appstream package
         id: changed
         run: |
-          echo "::set-output name=package::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -o 'AppImage/[^/]*' | head -n 1)"
+          git diff --name-only HEAD^ HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream'
+          echo "::set-output name=package::$(git diff --name-only HEAD^ HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream')"
 
       - name: Create AppImage from Alpine
         run: |
