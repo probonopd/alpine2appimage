@@ -20,8 +20,8 @@ jobs:
       - name: Show which package the last commit changed; fall back to appstream package
         id: changed
         run: |
-          git diff --name-only HEAD^ HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream'
-          echo "::set-output name=package::$(git diff --name-only HEAD^ HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream')"
+          git diff --name-only HEAD~1..HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream'
+          echo "::set-output name=package::$(git diff --name-only HEAD~1..HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream')"
 
       - name: Create AppImage from Alpine
         run: |
