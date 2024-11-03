@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        description: 'Package name (e.g. srb2)'
+        description: 'Package name (e.g. appstream)'
         required: false
 
 jobs:
@@ -15,21 +15,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # So we can diff against the previous commit
 
       - name: Show which package the last commit changed; fall back to appstream package
         id: changed
         run: |
-          git diff --name-only HEAD~1..HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream'
-          echo "::set-output name=package::$(git diff --name-only HEAD~1..HEAD | grep 'AppImage/' | cut -d/ -f2 | head -n 1 || echo 'appstream')"
+          git diff --name-only HEAD~1
 
       - name: Create AppImage from Alpine
         run: |
           cd AppImage/
-          make PACKAGE=${{ github.event.inputs.package || steps.changed.outputs.package }}
+          make PACKAGE=${{ github.event.inputs.package || 'appstream' }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: appimage
-          path: AppImage/${{ github.event.inputs.package || steps.changed.outputs.package }}/out/*.AppImage
+          path: AppImage/${{ github.event.inputs.package || 'appstream' }}/out/*.AppImage
