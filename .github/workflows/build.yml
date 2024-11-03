@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package name (e.g. srb2)'
+        required: false
 
 jobs:
   build:
@@ -14,11 +19,11 @@ jobs:
 
       - name: Create AppImage from Alpine
         run: |
-          cd AppImage/srb2
+          cd AppImage/${{ github.event.inputs.package || 'srb2' }}
           make
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: srt2-appimage
-          path: AppImage/srb2/out/*.AppImage
+          path: AppImage/${{ github.event.inputs.package || 'srb2' }}/out/*.AppImage
