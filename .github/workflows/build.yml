@@ -25,7 +25,6 @@ jobs:
       - name: Create AppImage from Alpine
         run: |
           cd AppImage/
-          make PACKAGE=${{  }}
           make PACKAGE=${{ github.event.inputs.package || steps.changed.outputs.package }}
 
       - name: Upload artifacts
