@@ -19,11 +19,11 @@ jobs:
 
       - name: Create AppImage from Alpine
         run: |
-          cd AppImage/${{ github.event.inputs.package || 'srb2' }}
-          make
+          cd AppImage/
+          make PACKAGE=${{ github.event.inputs.package || 'srb2' }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: srt2-appimage
+          name: appimage
           path: AppImage/${{ github.event.inputs.package || 'srb2' }}/out/*.AppImage

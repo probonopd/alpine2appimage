@@ -2,13 +2,18 @@ DOCKER=docker
 
 .PHONY: appimage
 appimage: witchery-compose appimagetool.AppImage
-	rm -rf out
-	mkdir out
+	@:$(if $(PACKAGE),,$(error PACKAGE is not set))
+	sudo rm -rf "${PACKAGE}/out"
+	mkdir -p "${PACKAGE}/out"
 	$(DOCKER) run \
-		--volume "${PWD}:/src" \
-		--volume "${PWD}/out:/out" \
+		--workdir /src \
+		--volume "${PWD}/${PACKAGE}:/src" \
+		--volume "${PWD}/${PACKAGE}/out:/out" \
+		--volume "${PWD}/:/tools" \
 		--env SRC_DIR=/src \
 		--env OUT_DIR=/out \
+		--env TOOLS_DIR=/tools \
+		--env PACKAGE="${PACKAGE}" \
 		--rm \
 		alpine:edge /src/build.sh
 
