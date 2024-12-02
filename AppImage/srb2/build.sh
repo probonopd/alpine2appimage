@@ -49,7 +49,8 @@ sed -i 's|exec|cd share/games/SRB2; exec|' "$appdir"/AppRun
 
 ############################################
 
-rdfind -makesymlinks true . # Replace duplicate files with symlinks
+rdfind -makesymlinks true . # Replace duplicate files with absolute symlinks
+symlinks -c . # Convert absolute into relative symlinks
 
 "$tools_dir"/appimagetool.AppImage "$appdir"
 mv *.AppImage "$out_dir"/
