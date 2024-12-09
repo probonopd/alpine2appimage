@@ -40,7 +40,7 @@ rm hexchat.png
 ############################################
 
 # Remove extraneous symlinks (to busybox)
-find "$appdir"/usr/bin/ -type l -delete
+# find "$appdir"/usr/bin/ -type l -delete
 
 # Remove extraneous binaries and directories
 rm -rf "$appdir"/bin/
