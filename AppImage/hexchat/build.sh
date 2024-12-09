@@ -25,9 +25,7 @@ chmod 755 "$appdir"
 
 ############################################
 
-find "$appdir"/usr/share/pixmaps || true
-find "$appdir"/usr/share/icons || true
-find "$appdir"/usr/share/applications || true
+find "$appdir" || true
 
 # Parsing svg is a pain for AppImage thumbnailers, hence use png
 # ImageMagick even fails to convert the svg, hence we have to grab a png from their website
@@ -40,7 +38,7 @@ rm hexchat.png
 ############################################
 
 # Remove extraneous symlinks (to busybox)
-# find "$appdir"/usr/bin/ -type l -delete
+find "$appdir"/usr/bin/ -type l -delete
 
 # Remove extraneous binaries and directories
 rm -rf "$appdir"/bin/
