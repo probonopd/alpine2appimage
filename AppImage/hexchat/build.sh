@@ -29,6 +29,13 @@ find "$appdir"/usr/share/pixmaps || true
 find "$appdir"/usr/share/icons || true
 find "$appdir"/usr/share/applications || true
 
+# Parsing svg is a pain for AppImage thumbnailers, hence use png
+apk add imagemagick
+convert -resize 256x256 "$appdir"/usr/share/icons/hicolor/scalable/apps/io.github.Hexchat.svg "$appdir"/usr/share/icons/hicolor/256x256/apps/io.github.Hexchat.png
+cp "$appdir"/usr/share/icons/hicolor/256x256/apps/io.github.Hexchat.png .
+
+############################################
+
 # Remove extraneous symlinks (to busybox)
 find "$appdir"/usr/bin/ -type l -delete
 
@@ -48,7 +55,7 @@ rm -rf "$appdir"/tmp/
 ############################################
 
 export APPIMAGE_EXTRACT_AND_RUN=1
-"$tools_dir"/appimagetool.AppImage -s deploy "$appdir"/usr/share/applications/appstreamcli.desktop
+"$tools_dir"/appimagetool.AppImage -s deploy "$appdir"/usr/share/applications/*.desktop
 
 ############################################
 
