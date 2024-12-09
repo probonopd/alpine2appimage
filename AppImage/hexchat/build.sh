@@ -30,11 +30,12 @@ find "$appdir"/usr/share/icons || true
 find "$appdir"/usr/share/applications || true
 
 # Parsing svg is a pain for AppImage thumbnailers, hence use png
+# ImageMagick even fails to convert the svg, hence we have to grab a png from their website
 apk add imagemagick file
-file "$appdir"/usr/share/icons/hicolor/scalable/apps/io.github.Hexchat.svg
-ls -lh "$appdir"/usr/share/icons/hicolor/256x256/apps
-magick -resize 256x256 "$appdir"/usr/share/icons/hicolor/scalable/apps/io.github.Hexchat.svg "$appdir"/usr/share/icons/hicolor/256x256/apps/io.github.Hexchat.png
+wget -q "https://avatars.githubusercontent.com/u/1938483?s=200&v=4" -O hexchat.png
+magick -resize 128x128 hexchat.png "$appdir"/usr/share/icons/hicolor/128x128/apps/io.github.Hexchat.png
 cp "$appdir"/usr/share/icons/hicolor/256x256/apps/io.github.Hexchat.png .
+rm hexchat.png
 
 ############################################
 
