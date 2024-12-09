@@ -29,13 +29,11 @@ find "$appdir" || true
 
 # Parsing svg is a pain for AppImage thumbnailers, hence use png
 # ImageMagick even fails to convert the svg, hence we have to grab a png from their website
-apk add imagemagick file
+apk add imagemagick
 wget -q "https://avatars.githubusercontent.com/u/1938483?s=200&v=4" -O hexchat.png
 magick hexchat.png -resize 128@ "$appdir"/usr/share/icons/hicolor/128x128/apps/io.github.Hexchat.png
 cp "$appdir"/usr/share/icons/hicolor/128x128/apps/io.github.Hexchat.png .
 rm hexchat.png
-
-file "$appdir"/usr/bin/hexchat
 
 ############################################
 
@@ -45,7 +43,7 @@ find "$appdir"/usr/bin/ -type l -delete
 # Remove extraneous binaries and directories
 rm -rf "$appdir"/bin/
 rm -rf "$appdir"/sbin/
-find "$appdir"/usr/bin/ -type f -not -name 'appstreamcli' -delete
+find "$appdir"/usr/bin/ -type f -not -name "$PACKAGE" -delete # FIXME: It would be better not have those installed in the first place...
 rm -rf "$appdir"/usr/sbin/
 rm -rf "$appdir"/usr/libexec/
 rm -rf "$appdir"/usr/share/udhcpc
