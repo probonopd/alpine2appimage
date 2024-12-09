@@ -15,7 +15,7 @@ appimage: witchery-compose appimagetool.AppImage
 		--env TOOLS_DIR=/tools \
 		--env PACKAGE="${PACKAGE}" \
 		--rm \
-		alpine:edge /src/build.sh
+		alpine:edge sh -ex /src/build.sh
 
 witchery-compose:
 	wget https://raw.githubusercontent.com/witchery-project/witchery/refs/heads/master/witchery-compose
