@@ -35,6 +35,8 @@ magick hexchat.png -resize 128@ "$appdir"/usr/share/icons/hicolor/128x128/apps/i
 cp "$appdir"/usr/share/icons/hicolor/128x128/apps/io.github.Hexchat.png .
 rm hexchat.png
 
+file "$appdir"/usr/bin/hexchat
+
 ############################################
 
 # Remove extraneous symlinks (to busybox)
