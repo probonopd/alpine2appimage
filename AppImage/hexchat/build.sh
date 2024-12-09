@@ -25,9 +25,9 @@ chmod 755 "$appdir"
 
 ############################################
 
-find usr/share/pixmaps
-find usr/share/icons
-find usr/share/applications
+find "$appdir"/usr/share/pixmaps
+find "$appdir"/usr/share/icons
+find "$appdir"/usr/share/applications
 
 # Remove extraneous symlinks (to busybox)
 find "$appdir"/usr/bin/ -type l -delete
