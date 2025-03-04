@@ -23,6 +23,7 @@ apk update && apk add file rdfind
 	-d mesa-egl \
 	-d libx11 \
 	-d libxext \
+	-d libxi \
 	-d alsa-lib \
 	-d alsa-plugins \
 	-d alsa-plugins-pulse \
@@ -43,9 +44,7 @@ export APPIMAGE_EXTRACT_AND_RUN=1
 
 ############################################
 
-# We need to cd to the data directory before starting the game so it can find its files.
-# Would be better to set SRB2WADDIR, but that doesn't work with relative paths due to a bug.
-sed -i 's|exec|cd share/games/SRB2; exec|' "$appdir"/AppRun
+sed -i '2a export SRB2WADDIR=${SRB2WADDIR:-share/games/SRB2}' "$appdir"/AppRun
 
 ############################################
 
