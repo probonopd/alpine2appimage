@@ -48,7 +48,8 @@ sed -i '2a export SRB2WADDIR=${SRB2WADDIR:-share/games/SRB2}' "$appdir"/AppRun
 
 ############################################
 
-rdfind -makesymlinks true . # Replace duplicate files with symlinks
+rdfind -makesymlinks true . # Replace duplicate files with absolute symlinks
+symlinks -c . # Convert absolute into relative symlinks
 
 "$tools_dir"/appimagetool.AppImage "$appdir"
 mv *.AppImage "$out_dir"/
